@@ -26,6 +26,7 @@ chrome-user-data
 *.env
 *.ini
 *.rest
+requests/
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
