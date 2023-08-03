@@ -26,11 +26,29 @@ Blog.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    year: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+      validate: {
+        isAtLeast1991(value) {
+          if (value < 1991) {
+            throw new Error("year must be at least 1991");
+          }
+        },
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
   {
     sequelize,
     underscored: true,
-    timestamps: false,
     modelName: "blog",
   }
 );
