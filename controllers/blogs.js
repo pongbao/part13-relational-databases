@@ -28,6 +28,7 @@ router.get("/", async (req, res) => {
 router.post("/", tokenExtractor, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.decodedToken.id);
+
     const blog = await Blog.create({
       ...req.body,
       userId: user.id,
@@ -78,7 +79,7 @@ router.delete("/:id", tokenExtractor, blogFinder, async (req, res, next) => {
       if (req.blog) {
         if (req.blog.userId === req.decodedToken.id) {
           await Blog.destroy({ where: { id: req.params.id } });
-          res.status(204);
+          res.sendStatus(204);
         } else {
           return res.status(401).json({ error: "unauthorized" });
         }
